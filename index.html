@@ -12,45 +12,35 @@
       min-height: 100vh; display: flex; flex-direction: column;
       align-items: center; padding: 40px 16px 80px;
     }
-    .header { text-align: center; margin-bottom: 36px; }
-    .header .icon { font-size: 48px; margin-bottom: 8px; }
-    .header h1 { font-size: 1.9rem; font-weight: 700; color: #fff; }
-    .header p  { color: #8b949e; margin-top: 6px; font-size: 1rem; }
+    .hero { text-align: center; margin-bottom: 48px; }
+    .hero .icon { font-size: 56px; margin-bottom: 12px; }
+    .hero h1 { font-size: 2.2rem; font-weight: 700; color: #fff; }
+    .hero p  { color: #8b949e; margin-top: 8px; font-size: 1.05rem; }
     .card {
       background: #161b22; border: 1px solid #30363d;
-      border-radius: 16px; padding: 32px 36px;
-      width: 100%; max-width: 560px; margin-bottom: 20px;
+      border-radius: 16px; padding: 36px 40px;
+      width: 100%; max-width: 580px; margin-bottom: 24px;
     }
     .card h2 {
-      font-size: .8rem; font-weight: 600; color: #8b949e;
-      text-transform: uppercase; letter-spacing: .1em; margin-bottom: 20px;
+      font-size: 1rem; font-weight: 600; color: #8b949e;
+      text-transform: uppercase; letter-spacing: .08em; margin-bottom: 24px;
     }
-    .field { margin-bottom: 18px; }
-    .field:last-child { margin-bottom: 0; }
-    .field label {
-      display: block; font-size: .875rem;
-      font-weight: 500; color: #c9d1d9; margin-bottom: 6px;
-    }
-    .field label span { color: #6e7681; font-weight: 400; }
+    .field { margin-bottom: 20px; }
+    .field label { display: block; font-size: .875rem; font-weight: 500; color: #c9d1d9; margin-bottom: 6px; }
+    .field label span { color: #8b949e; font-weight: 400; }
     .field input, .field select {
       width: 100%; background: #0d1117; border: 1px solid #30363d;
       border-radius: 8px; padding: 10px 14px; color: #e6edf3;
       font-size: .95rem; outline: none; transition: border-color .2s;
     }
-    .field input:focus, .field select:focus { border-color: #388bfd; box-shadow: 0 0 0 3px rgba(56,139,253,.15); }
+    .field input:focus, .field select:focus { border-color: #388bfd; }
     .field input::placeholder { color: #484f58; }
-    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-    .saved-badge {
-      display: inline-block; font-size: .7rem; color: #3fb950;
-      background: #0d4429; border: 1px solid #238636;
-      border-radius: 20px; padding: 1px 8px; margin-left: 6px;
-      vertical-align: middle;
-    }
+    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
     .token-note {
       background: #1c2128; border: 1px solid #30363d;
       border-left: 3px solid #388bfd; border-radius: 8px;
-      padding: 12px 14px; font-size: .83rem; color: #8b949e;
-      line-height: 1.6; margin-bottom: 18px;
+      padding: 14px 16px; font-size: .85rem; color: #8b949e;
+      line-height: 1.6; margin-bottom: 20px;
     }
     .token-note a { color: #388bfd; text-decoration: none; }
     .token-note a:hover { text-decoration: underline; }
@@ -58,64 +48,77 @@
       width: 100%; padding: 14px; background: #238636;
       border: none; border-radius: 10px; color: #fff;
       font-size: 1rem; font-weight: 600; cursor: pointer;
-      transition: background .2s; display: flex;
-      align-items: center; justify-content: center; gap: 8px;
+      transition: background .2s, transform .1s;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
     }
     .btn-primary:hover  { background: #2ea043; }
+    .btn-primary:active { transform: scale(.98); }
     .btn-primary:disabled { background: #21262d; color: #484f58; cursor: not-allowed; }
     #status {
-      display: none; border-radius: 10px; padding: 16px 18px;
-      font-size: .88rem; line-height: 1.7; margin-top: 16px;
+      display: none; border-radius: 10px; padding: 16px 20px;
+      font-size: .9rem; line-height: 1.6; margin-top: 16px;
     }
     #status.success { background: #0d4429; border: 1px solid #238636; color: #3fb950; display: block; }
     #status.error   { background: #300d0d; border: 1px solid #f85149; color: #f85149; display: block; }
     #status.info    { background: #1c2128; border: 1px solid #388bfd; color: #79c0ff; display: block; }
-    #status a { color: inherit; }
-    @keyframes spin { to { transform: rotate(360deg); } }
-    .spinner {
-      width: 18px; height: 18px; border: 2px solid rgba(255,255,255,.2);
-      border-top-color: #fff; border-radius: 50%;
-      animation: spin .7s linear infinite;
+    .steps { max-width: 580px; width: 100%; }
+    .steps h2 {
+      font-size: 1rem; font-weight: 600; color: #8b949e;
+      text-transform: uppercase; letter-spacing: .08em; margin-bottom: 20px;
     }
-    code {
+    .step { display: flex; gap: 16px; margin-bottom: 20px; }
+    .step-num {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: #238636; color: #fff; font-weight: 700;
+      font-size: .85rem; display: flex; align-items: center;
+      justify-content: center; flex-shrink: 0;
+    }
+    .step-body h3 { font-size: .95rem; font-weight: 600; color: #c9d1d9; margin-bottom: 4px; }
+    .step-body p  { font-size: .85rem; color: #8b949e; line-height: 1.6; }
+    .step-body a  { color: #388bfd; text-decoration: none; }
+    .step-body a:hover { text-decoration: underline; }
+    .step-body code {
       background: #0d1117; border: 1px solid #30363d;
       border-radius: 4px; padding: 1px 6px;
       font-size: .82rem; color: #79c0ff;
     }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .spinner {
+      width: 18px; height: 18px;
+      border: 2px solid rgba(255,255,255,.2);
+      border-top-color: #fff; border-radius: 50%;
+      animation: spin .7s linear infinite;
+    }
+    hr.divider { border: none; border-top: 1px solid #21262d; margin: 32px 0; }
   </style>
 </head>
 <body>
 
-<div class="header">
-  <div class="icon">🏕️</div>
-  <h1>Shelter Booker</h1>
-  <p>Schedule a Naturstyrelsen booking — while you sleep.</p>
+<div style="text-align:center;margin-bottom:32px;">
+  <div style="font-size:48px;">🏕️</div>
+  <h1 style="font-size:1.8rem;font-weight:700;color:#fff;margin-top:8px;">Shelter Booker</h1>
+  <p style="color:#8b949e;margin-top:6px;">Schedule a Naturstyrelsen shelter — while you sleep.</p>
 </div>
 
-<!-- GitHub credentials -->
 <div class="card">
-  <h2>GitHub <span id="savedBadge" class="saved-badge" style="display:none">✓ remembered</span></h2>
-  <div class="token-note">
-    🔑 Saved in your browser only. Never sent anywhere except GitHub's API.
-    <br><a href="https://github.com/settings/tokens/new?scopes=repo&description=ShelterBooker" target="_blank">Create token (tick repo scope) →</a>
-  </div>
+  <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;"><h2 style="margin:0;font-size:.8rem;font-weight:600;color:#8b949e;text-transform:uppercase;letter-spacing:.1em;">GitHub credentials</h2><span id="credBadge" style="background:#0d4429;border:1px solid #238636;color:#3fb950;font-size:.7rem;font-weight:600;padding:2px 8px;border-radius:20px;opacity:0;transition:opacity .4s;">&#x2713; Saved</span></div>
   <div class="row">
     <div class="field">
       <label>GitHub Username</label>
-      <input id="ghUser" type="text" placeholder="avioh1211" autocomplete="off" />
+      <input id="ghUser" type="text" placeholder="avioh1211" oninput="saveCredentials()" />
     </div>
     <div class="field">
       <label>Personal Access Token</label>
-      <input id="ghToken" type="password" placeholder="ghp_xxxxxxxxxxxx" autocomplete="off" />
+      <input id="ghToken" type="password" placeholder="ghp_xxxxxxxxxxxx" oninput="saveCredentials()" />
     </div>
   </div>
+  <button onclick="clearCredentials()" style="background:none;border:none;color:#484f58;font-size:.78rem;cursor:pointer;padding:0;margin-top:8px;text-decoration:underline;">Clear saved credentials</button>
 </div>
 
-<!-- Booking details -->
 <div class="card">
-  <h2>Booking</h2>
+  <h2>Booking details</h2>
   <div class="field">
-    <label>Shelter URL</label>
+    <label>Shelter booking URL</label>
     <input id="shelterUrl" type="url" placeholder="https://book.naturstyrelsen.dk/sted/strandmoelle-strand-shelter/" />
   </div>
   <div class="row">
@@ -141,31 +144,29 @@
   </div>
 </div>
 
-<!-- Personal details -->
 <div class="card">
-  <h2>Your details</h2>
+  <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;"><h2 style="margin:0;font-size:.8rem;font-weight:600;color:#8b949e;text-transform:uppercase;letter-spacing:.1em;">Your details</h2><span id="detailsBadge" style="background:#0d4429;border:1px solid #238636;color:#3fb950;font-size:.7rem;font-weight:600;padding:2px 8px;border-radius:20px;opacity:0;transition:opacity .4s;">&#x2713; Saved</span></div>
   <div class="row">
     <div class="field">
       <label>First name <span>(Fornavn)</span></label>
-      <input id="fornavn" type="text" placeholder="Avi" />
+      <input id="fornavn" type="text" placeholder="Avi" oninput="saveDetails()" />
     </div>
     <div class="field">
       <label>Last name <span>(Efternavn)</span></label>
-      <input id="efternavn" type="text" placeholder="Ohayon" />
+      <input id="efternavn" type="text" placeholder="Ohayon" oninput="saveDetails()" />
     </div>
   </div>
   <div class="field">
     <label>Email</label>
-    <input id="email" type="email" placeholder="you@example.com" />
+    <input id="email" type="email" placeholder="you@example.com" oninput="saveDetails()" />
   </div>
   <div class="field">
     <label>Phone <span>(Telefon)</span></label>
-    <input id="telefon" type="tel" placeholder="28575581" />
+    <input id="telefon" type="tel" placeholder="28575581" oninput="saveDetails()" />
   </div>
 </div>
 
-<!-- Submit -->
-<div style="max-width:560px;width:100%;">
+<div style="max-width:580px;width:100%;">
   <button class="btn-primary" id="scheduleBtn" onclick="scheduleBooking()">
     <span>🚀</span> Schedule Booking
   </button>
@@ -173,39 +174,12 @@
 </div>
 
 <script>
-// ── Persist fields in localStorage ───────────────────────────────────────────
-const PERSIST = ['ghUser', 'ghToken', 'fornavn', 'efternavn', 'email', 'telefon'];
-
-function saveFields() {
-  PERSIST.forEach(id => {
-    const el = document.getElementById(id);
-    if (el) localStorage.setItem('sb_' + id, el.value);
-  });
-  // Show "remembered" badge once we have user + token
-  const hasCredentials = localStorage.getItem('sb_ghUser') && localStorage.getItem('sb_ghToken');
-  document.getElementById('savedBadge').style.display = hasCredentials ? 'inline-block' : 'none';
-}
-
-function loadFields() {
-  let anyLoaded = false;
-  PERSIST.forEach(id => {
-    const el = document.getElementById(id);
-    const v = localStorage.getItem('sb_' + id);
-    if (el && v) { el.value = v; anyLoaded = true; }
-  });
-  const hasCredentials = localStorage.getItem('sb_ghUser') && localStorage.getItem('sb_ghToken');
-  document.getElementById('savedBadge').style.display = hasCredentials ? 'inline-block' : 'none';
-}
-
-window.addEventListener('DOMContentLoaded', () => {
-  loadFields();
-  PERSIST.forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.addEventListener('input', saveFields);
-  });
-});
-
-// ── Helpers ───────────────────────────────────────────────────────────────────
+function flashBadge(id){const el=document.getElementById(id);if(!el)return;el.style.opacity="1";clearTimeout(el._t);el._t=setTimeout(()=>el.style.opacity="0",2000);}
+function saveCredentials(){localStorage.setItem("sb_u",document.getElementById("ghUser").value);localStorage.setItem("sb_t",document.getElementById("ghToken").value);flashBadge("credBadge");}
+function clearCredentials(){["sb_u","sb_t"].forEach(k=>localStorage.removeItem(k));["ghUser","ghToken"].forEach(id=>document.getElementById(id).value="");}
+function saveDetails(){["fornavn","efternavn","email","telefon"].forEach(id=>localStorage.setItem("sb_"+id,document.getElementById(id).value));flashBadge("detailsBadge");}
+function clearDetails(){["fornavn","efternavn","email","telefon"].forEach(id=>{localStorage.removeItem("sb_"+id);document.getElementById(id).value="";});}
+(function(){const m={ghUser:"sb_u",ghToken:"sb_t",fornavn:"sb_fornavn",efternavn:"sb_efternavn",email:"sb_email",telefon:"sb_telefon"};for(const[id,k]of Object.entries(m)){const v=localStorage.getItem(k);if(v)document.getElementById(id).value=v;}})();
 function val(id) { return document.getElementById(id).value.trim(); }
 
 function setStatus(msg, type) {
@@ -214,10 +188,10 @@ function setStatus(msg, type) {
   el.innerHTML = msg;
 }
 
-function setLoading(on) {
+function setLoading(loading) {
   const btn = document.getElementById('scheduleBtn');
-  btn.disabled = on;
-  btn.innerHTML = on
+  btn.disabled = loading;
+  btn.innerHTML = loading
     ? '<div class="spinner"></div> Saving to GitHub...'
     : '<span>🚀</span> Schedule Booking';
 }
@@ -228,34 +202,42 @@ function toCronUTC(dateStr, timeStr) {
 }
 
 function danishMonth(dateStr) {
-  return ['Januar','Februar','Marts','April','Maj','Juni',
-          'Juli','August','September','Oktober','November','December']
-         [new Date(dateStr).getMonth()];
+  const months = ['Januar','Februar','Marts','April','Maj','Juni',
+                  'Juli','August','September','Oktober','November','December'];
+  return months[new Date(dateStr).getMonth()];
 }
 
-// ── GitHub API ────────────────────────────────────────────────────────────────
+// Step 1: detect default branch (main or master)
 async function getDefaultBranch(user, token, repo) {
   const res = await fetch(`https://api.github.com/repos/${user}/${repo}`, {
     headers: { Authorization: `token ${token}`, Accept: 'application/vnd.github.v3+json' }
   });
   if (!res.ok) {
     const e = await res.json();
-    throw new Error(`Cannot access "${user}/${repo}": ${e.message}`);
+    throw new Error(`Cannot access repo "${user}/${repo}": ${e.message}. Check the repo exists and your token has repo scope.`);
   }
-  return (await res.json()).default_branch || 'main';
+  const data = await res.json();
+  return data.default_branch || 'main';
 }
 
+// Create or update a file — branch is always passed explicitly
 async function githubPut(user, token, repo, path, content, message, branch) {
   const url = `https://api.github.com/repos/${user}/${repo}/contents/${path}`;
-  let sha;
+
+  // Get SHA if file already exists (required for updates)
+  let sha = undefined;
   try {
-    const r = await fetch(url + `?ref=${branch}`, {
+    const res = await fetch(url + `?ref=${branch}`, {
       headers: { Authorization: `token ${token}`, Accept: 'application/vnd.github.v3+json' }
     });
-    if (r.ok) sha = (await r.json()).sha;
+    if (res.ok) { sha = (await res.json()).sha; }
   } catch(e) {}
 
-  const body = { message, content: btoa(unescape(encodeURIComponent(content))), branch };
+  const body = {
+    message,
+    content: btoa(unescape(encodeURIComponent(content))),
+    branch
+  };
   if (sha) body.sha = sha;
 
   const res = await fetch(url, {
@@ -267,14 +249,14 @@ async function githubPut(user, token, repo, path, content, message, branch) {
     },
     body: JSON.stringify(body)
   });
+
   if (!res.ok) {
-    const e = await res.json();
-    throw new Error(`Failed writing "${path}": ${e.message}`);
+    const err = await res.json();
+    throw new Error(`Failed to write "${path}": ${err.message}`);
   }
   return res.json();
 }
 
-// ── Schedule ──────────────────────────────────────────────────────────────────
 async function scheduleBooking() {
   const ghUser    = val('ghUser');
   const ghToken   = val('ghToken');
@@ -288,28 +270,33 @@ async function scheduleBooking() {
   const antal     = val('antal');
 
   if (!ghUser || !ghToken || !url || !dateStr || !fornavn || !email || !telefon) {
-    setStatus('⚠️ Please fill in all fields.', 'error');
+    setStatus('Please fill in all fields.', 'error');
     return;
   }
 
   setLoading(true);
 
   try {
+    // Detect branch first — this also validates the token and repo exist
     setStatus('Connecting to GitHub...', 'info');
     const branch = await getDefaultBranch(ghUser, ghToken, 'shelter-booker');
-    setStatus(`Connected (branch: <strong>${branch}</strong>). Saving files...`, 'info');
+    setStatus(`Connected! Repo uses branch: <strong>${branch}</strong>. Saving files...`, 'info');
 
     const day   = String(new Date(dateStr).getDate());
     const month = danishMonth(dateStr);
     const cron  = toCronUTC(dateStr, timeStr);
 
-    // 1. config.json
+    // ── 1. config.json ────────────────────────────────────────────────────────
+    const config = {
+      shelterUrl: url, targetDay: day, targetMonth: month,
+      fireTime: timeStr + ':00',
+      data: { fornavn, efternavn, email, telefon, antal }
+    };
+    setStatus('Saving config.json...', 'info');
     await githubPut(ghUser, ghToken, 'shelter-booker', 'config.json',
-      JSON.stringify({ shelterUrl: url, targetDay: day, targetMonth: month,
-        fireTime: timeStr + ':00', data: { fornavn, efternavn, email, telefon, antal }
-      }, null, 2), 'Update booking config', branch);
+      JSON.stringify(config, null, 2), 'Update booking config', branch);
 
-    // 2. GitHub Actions workflow
+    // ── 2. GitHub Actions workflow ────────────────────────────────────────────
     const yaml =
 `name: Book Shelter
 
@@ -344,13 +331,21 @@ jobs:
           path: "*.png"
           if-no-files-found: ignore
 `;
-    setStatus('Setting up GitHub Actions...', 'info');
+    // GitHub API can't write to subfolders that don't exist yet.
+    // Create the folder structure first with placeholder files, then write the real file.
+    setStatus('Creating .github/workflows/ folder structure...', 'info');
+    await githubPut(ghUser, ghToken, 'shelter-booker',
+      '.github/.gitkeep', '', 'Create .github folder', branch);
+    await githubPut(ghUser, ghToken, 'shelter-booker',
+      '.github/workflows/.gitkeep', '', 'Create workflows folder', branch);
+
+    setStatus('Setting up GitHub Actions workflow...', 'info');
     await githubPut(ghUser, ghToken, 'shelter-booker',
       '.github/workflows/book.yml', yaml, 'Schedule booking workflow', branch);
 
-    // 3. book_shelter.py
+    // ── 3. book_shelter.py ────────────────────────────────────────────────────
     const py =
-`import asyncio, re, json
+`import asyncio, re, os, sys, json
 from datetime import datetime
 from playwright.async_api import async_playwright
 
@@ -364,7 +359,11 @@ TARGET_MONTH = cfg['targetMonth']
 MAX_ATTEMPTS = 5
 
 COOKIE_BTN = "#CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll"
-SUBMIT_SELECTORS = ["a.place-submitbtn", ".place-submitbtn", "a:has-text('Book nu')"]
+SUBMIT_SELECTORS = [
+    "a.place-submitbtn",
+    ".place-submitbtn",
+    "a:has-text('Book nu')",
+]
 
 def log(msg):
     print(f"[{datetime.now().strftime('%H:%M:%S')}] {msg}", flush=True)
@@ -395,15 +394,15 @@ async def click_day(page, day):
     )
     count = await day_divs.count()
     if count == 0:
-        raise RuntimeError(f"Day {day} not found!")
+        raise RuntimeError(f"Day {day} not found in calendar!")
     clicked = False
     for i in range(count):
         div = day_divs.nth(i)
         td_class = await div.locator("xpath=ancestor::td[1]").get_attribute("class") or ""
         if "day-overlay-occupied" in td_class or "td-disabled" in td_class:
-            log(f"  Cell {i+1} booked, skipping")
+            log(f"  Day {day} cell {i+1} is booked, skipping")
             continue
-        log(f"  Cell {i+1} available - clicking!")
+        log(f"  Day {day} cell {i+1} is available - clicking!")
         await div.click(force=True)
         clicked = True
         break
@@ -424,7 +423,7 @@ async def fill_email_confirm(page, email):
     await page.keyboard.type(email, delay=40)
     el = await page.query_selector("#EmailConfirm")
     await page.evaluate(
-        "el => { ['input','change','blur'].forEach(e => el.dispatchEvent(new Event(e, {bubbles:true}))); }",
+        "el => { el.dispatchEvent(new Event('input',{bubbles:true})); el.dispatchEvent(new Event('change',{bubbles:true})); el.dispatchEvent(new Event('blur',{bubbles:true})); }",
         el
     )
 
@@ -445,12 +444,28 @@ async def click_submit(page):
         try:
             btn = page.locator(sel).first
             if await btn.is_visible():
-                log(f"Clicking: {sel}")
+                log(f"Clicking submit: {sel}")
                 await btn.click()
                 return True
         except Exception:
             continue
     return False
+
+async def check_confirmation(page):
+    keywords = ["bekraeftelse", "confirmation", "tak", "booket", "succes", "kvittering"]
+    content = (await page.content()).lower()
+    if any(k in content for k in keywords):
+        log(f"CONFIRMED! Check {DATA['email']}")
+    else:
+        log(f"WARNING: No confirmation detected. Check {DATA['email']}")
+
+async def save_screenshot(page, label):
+    try:
+        path = f"booking_{label}_{datetime.now().strftime('%H%M%S')}.png"
+        await page.screenshot(path=path, full_page=True)
+        log(f"Screenshot: {path}")
+    except Exception:
+        pass
 
 async def book_shelter():
     async with async_playwright() as p:
@@ -471,22 +486,13 @@ async def book_shelter():
                 if not await click_submit(page):
                     raise RuntimeError("Submit button not found!")
                 await asyncio.sleep(3)
-                content = (await page.content()).lower()
-                if any(k in content for k in ["bekraeftelse","tak","booket","succes","kvittering"]):
-                    log(f"CONFIRMED! Check {DATA['email']}")
-                else:
-                    log(f"Submitted - check {DATA['email']} to confirm")
-                path = f"booking_result_{datetime.now().strftime('%H%M%S')}.png"
-                await page.screenshot(path=path, full_page=True)
-                log(f"Screenshot saved: {path}")
+                await check_confirmation(page)
+                await save_screenshot(page, "success")
                 log("ALL DONE!")
                 break
             except Exception as e:
                 log(f"Attempt {attempt} failed: {e}")
-                try:
-                    await page.screenshot(path=f"error_{attempt}.png", full_page=True)
-                except Exception:
-                    pass
+                await save_screenshot(page, f"error_{attempt}")
                 if attempt < MAX_ATTEMPTS:
                     await asyncio.sleep(2)
                 else:
@@ -501,21 +507,23 @@ if __name__ == "__main__":
     await githubPut(ghUser, ghToken, 'shelter-booker',
       'book_shelter.py', py, 'Update booking script', branch);
 
-    // Done!
+    // ── Success ──────────────────────────────────────────────────────────────
     const d = new Date(dateStr);
     const friendly = d.toLocaleDateString('en-GB', { weekday:'long', day:'numeric', month:'long', year:'numeric' });
     setStatus(`
-      ✅ <strong>Booking scheduled!</strong><br><br>
-      📅 <strong>${friendly}</strong> at <strong>${timeStr}</strong><br>
-      🔗 <a href="${url}" target="_blank">${url}</a><br><br>
-      GitHub Actions will run at that time and send confirmation to <strong>${email}</strong>.<br><br>
-      <a href="https://github.com/${ghUser}/shelter-booker/actions" target="_blank">
-        → Watch it live on GitHub Actions
+      <strong>All done! Booking scheduled.</strong><br><br>
+      Date: <strong>${friendly}</strong><br>
+      GitHub Actions fires at: <strong>${timeStr}</strong> your local time<br>
+      Cron (UTC): <code>${cron}</code><br>
+      Shelter: <a href="${url}" target="_blank" style="color:#3fb950">${url}</a><br><br>
+      GitHub will run the script and send a confirmation to <strong>${email}</strong>.<br><br>
+      <a href="https://github.com/${ghUser}/shelter-booker/actions" target="_blank" style="color:#3fb950">
+        Watch it run on GitHub Actions →
       </a>
     `, 'success');
 
   } catch(err) {
-    setStatus(`❌ ${err.message}`, 'error');
+    setStatus(`Error: ${err.message}`, 'error');
   }
 
   setLoading(false);
