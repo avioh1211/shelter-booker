@@ -88,6 +88,7 @@ async def fill_fields(page):
     await page.fill("#Phone",      DATA["telefon"])
     await page.fill("#PeopleQuantity", DATA['antal'])
     await page.check("input[name='B_Confirm']")
+    await page.check("input[name='B_ConfirmPrivacy']")
     log("Form filled!")
 
 async def click_submit(page):
