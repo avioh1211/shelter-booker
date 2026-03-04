@@ -2,7 +2,7 @@ name: Book Shelter
 
 on:
   schedule:
-    - cron: '22 14 8 3 *'
+    - cron: '22 15 8 3 *'
   workflow_dispatch:
 
 jobs:
