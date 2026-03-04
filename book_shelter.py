@@ -38,7 +38,7 @@ async def navigate_to_month(page, target_month):
 
 async def click_day(page, day):
     log(f"Looking for day {day}...")
-    pattern = re.compile(r"^\s*" + day + r"\s*$")
+    pattern = re.compile(r"^\s*" + re.escape(day) + r"\s*$")
     day_divs = page.locator("div.day").filter(has_text=pattern)
     count = await day_divs.count()
     if count == 0:
@@ -64,26 +64,29 @@ async def click_day(page, day):
     await asyncio.sleep(0.8)
 
 async def fill_email_confirm(page, email):
-    field = page.locator("#EmailConfirm")
-    await field.click()
-    await field.press("Control+a")
-    await field.press("Delete")
-    await page.keyboard.type(email, delay=40)
-    el = await page.query_selector("#EmailConfirm")
     await page.evaluate(
-        "el => { ['input','change','blur'].forEach(e => el.dispatchEvent(new Event(e,{bubbles:true}))); }",
-        el
+        """(v) => {
+            var el = document.querySelector('#EmailConfirm');
+            if (!el) return;
+            var setter = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value').set;
+            setter.call(el, v);
+            ['input','change','blur'].forEach(function(e) {
+                el.dispatchEvent(new Event(e, {bubbles: true}));
+            });
+        }""",
+        email
     )
+    log("EmailConfirm set via JS")
 
 async def fill_fields(page):
     log("Waiting for form...")
     await page.wait_for_selector("div.place-form-wrapper", state="visible", timeout=8000)
-    await page.fill("#Firstname",    DATA["fornavn"])
-    await page.fill("#Lastname",     DATA["efternavn"])
-    await page.fill("#Email",        DATA["email"])
-    await fill_email_confirm(page,   DATA["email"])
-    await page.fill("#Phone",        DATA["telefon"])
-    await page.select_option("select[name='B_Count']", value=DATA['antal'])
+    await page.fill("#Firstname",  DATA["fornavn"])
+    await page.fill("#Lastname",   DATA["efternavn"])
+    await page.fill("#Email",      DATA["email"])
+    await fill_email_confirm(page, DATA["email"])
+    await page.fill("#Phone",      DATA["telefon"])
+    await page.select_option("select[name='B_Count']", value=DATA["antal"])
     await page.check("input[name='B_Confirm']")
     log("Form filled!")
 
@@ -121,7 +124,7 @@ async def book_shelter():
                 body = (await page.content()).lower()
                 done = any(k in body for k in ["bekraeftelse","tak","booket","succes","kvittering"])
                 log(f"CONFIRMED! Check {DATA['email']}" if done else f"Submitted - check {DATA['email']}")
-                ts = datetime.now().strftime("%H%M%S")
+                ts = datetime.now().strftime('%H%M%S')
                 await page.screenshot(path=f"booking_{ts}.png", full_page=True)
                 log("ALL DONE!")
                 break
