@@ -339,7 +339,7 @@
       'async def click_day(page, day):',
       '    log(f"Looking for day {day}...")',
       '    day_divs = page.locator("div.day").filter(',
-      r'        has_text=re.compile(rf"^\s*{re.escape(day)}\s*$")',
+      '        has_text=re.compile(rf"^\s*{re.escape(day)}\s*$")',
       '    )',
       '    count = await day_divs.count()',
       '    if count == 0:',
