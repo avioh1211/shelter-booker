@@ -66,7 +66,7 @@ async def click_day(page, day):
 async def fill_email_confirm(page, email):
     await page.evaluate(
         """(v) => {
-            var el = document.querySelector('#EmailConfirm');
+            var el = document.querySelector('#Email2');
             if (!el) return;
             var setter = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value').set;
             setter.call(el, v);
@@ -86,7 +86,7 @@ async def fill_fields(page):
     await page.fill("#Email",      DATA["email"])
     await fill_email_confirm(page, DATA["email"])
     await page.fill("#Phone",      DATA["telefon"])
-    await page.select_option("select[name='B_Count']", value=DATA["antal"])
+    await page.fill("#PeopleQuantity", DATA['antal'])
     await page.check("input[name='B_Confirm']")
     log("Form filled!")
 
