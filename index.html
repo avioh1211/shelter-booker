@@ -338,29 +338,19 @@ function buildPython() {
     '    await asyncio.sleep(0.8)' + NL +
     NL +
     'async def fill_email_confirm(page, email):' + NL +
-    '    try:' + NL +
-    '        await page.wait_for_selector("#EmailConfirm", state="visible", timeout=10000)' + NL +
-    '    except Exception:' + NL +
-    '        log("#EmailConfirm not visible yet")' + NL +
-    '    try:' + NL +
-    '        await page.fill("#EmailConfirm", email)' + NL +
-    '        filled = await page.input_value("#EmailConfirm")' + NL +
-    '        if filled == email:' + NL +
-    '            log("EmailConfirm filled OK")' + NL +
-    '            return' + NL +
-    '    except Exception:' + NL +
-    '        pass' + NL +
-    '    field = page.locator("#EmailConfirm")' + NL +
-    '    await field.scroll_into_view_if_needed()' + NL +
-    '    await field.click()' + NL +
-    '    await field.press("Control+a")' + NL +
-    '    await field.press("Delete")' + NL +
-    '    await page.keyboard.type(email, delay=40)' + NL +
-    '    el = await page.query_selector("#EmailConfirm")' + NL +
-    '    await page.evaluate(' + NL +
-    "        \"el => { ['input','change','blur'].forEach(e => el.dispatchEvent(new Event(e,{bubbles:true}))); }\"," + NL +
-    '        el' + NL +
-    '    )' + NL +
+    '    js = \"\"\"' + NL +
+    '    (function(v) {' + NL +
+    '        var el = document.querySelector(\\"#EmailConfirm\\");' + NL +
+    '        if (!el) return;' + NL +
+    '        var setter = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, \\"value\\").set;' + NL +
+    '        setter.call(el, v);' + NL +
+    '        [\\"input\\",\\"change\\",\\"blur\\"].forEach(function(e){' + NL +
+    '            el.dispatchEvent(new Event(e, {bubbles: true}));' + NL +
+    '        });' + NL +
+    '    })(arguments[0])' + NL +
+    '    \"\"\"' + NL +
+    '    await page.evaluate(js, email)' + NL +
+    '    log(\"EmailConfirm set via JS\")' + NL +
     NL +
     ''async def fill_fields(page):' + NL +
     '    log("Waiting for form...")' + NL +
