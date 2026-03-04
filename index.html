@@ -6,72 +6,40 @@
   <title>Shelter Booker</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: 'Segoe UI', system-ui, sans-serif;
-      background: #0d1117; color: #e6edf3;
-      min-height: 100vh; display: flex; flex-direction: column;
-      align-items: center; padding: 40px 16px 80px;
-    }
+    body { font-family: 'Segoe UI', system-ui, sans-serif; background: #0d1117; color: #e6edf3; min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 40px 16px 80px; }
     .header { text-align: center; margin-bottom: 36px; }
-    .header .icon { font-size: 48px; margin-bottom: 8px; }
-    .header h1 { font-size: 1.9rem; font-weight: 700; color: #fff; }
-    .header p  { color: #8b949e; margin-top: 6px; font-size: 1rem; }
-    .card {
-      background: #161b22; border: 1px solid #30363d;
-      border-radius: 16px; padding: 32px 36px;
-      width: 100%; max-width: 560px; margin-bottom: 20px;
-    }
+    .header h1 { font-size: 1.9rem; font-weight: 700; color: #fff; margin-top: 8px; }
+    .header p  { color: #8b949e; margin-top: 6px; }
+    .card { background: #161b22; border: 1px solid #30363d; border-radius: 16px; padding: 32px 36px; width: 100%; max-width: 560px; margin-bottom: 20px; }
     .card-title { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; }
-    .card-title h2 {
-      font-size: .8rem; font-weight: 600; color: #8b949e;
-      text-transform: uppercase; letter-spacing: .1em; margin: 0;
-    }
-    .badge {
-      font-size: .7rem; color: #3fb950; background: #0d4429;
-      border: 1px solid #238636; border-radius: 20px; padding: 1px 8px;
-    }
+    .card-title h2 { font-size: .8rem; font-weight: 600; color: #8b949e; text-transform: uppercase; letter-spacing: .1em; margin: 0; }
+    .badge { font-size: .7rem; color: #3fb950; background: #0d4429; border: 1px solid #238636; border-radius: 20px; padding: 1px 8px; }
     .field { margin-bottom: 18px; }
     .field:last-child { margin-bottom: 0; }
     .field label { display: block; font-size: .875rem; font-weight: 500; color: #c9d1d9; margin-bottom: 6px; }
     .field label span { color: #6e7681; font-weight: 400; }
-    .field input, .field select {
-      width: 100%; background: #0d1117; border: 1px solid #30363d;
-      border-radius: 8px; padding: 10px 14px; color: #e6edf3;
-      font-size: .95rem; outline: none; transition: border-color .2s;
-    }
+    .field input, .field select { width: 100%; background: #0d1117; border: 1px solid #30363d; border-radius: 8px; padding: 10px 14px; color: #e6edf3; font-size: .95rem; outline: none; transition: border-color .2s; }
     .field input:focus, .field select:focus { border-color: #388bfd; box-shadow: 0 0 0 3px rgba(56,139,253,.15); }
     .field input::placeholder { color: #484f58; }
     .row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-    .note {
-      background: #1c2128; border: 1px solid #30363d;
-      border-left: 3px solid #388bfd; border-radius: 8px;
-      padding: 12px 14px; font-size: .83rem; color: #8b949e;
-      line-height: 1.6; margin-bottom: 18px;
-    }
+    .note { background: #1c2128; border: 1px solid #30363d; border-left: 3px solid #388bfd; border-radius: 8px; padding: 12px 14px; font-size: .83rem; color: #8b949e; line-height: 1.6; margin-bottom: 18px; }
     .note a { color: #388bfd; text-decoration: none; }
-    .note a:hover { text-decoration: underline; }
-    .btn {
-      width: 100%; padding: 14px; border: none; border-radius: 10px;
-      color: #fff; font-size: 1rem; font-weight: 600; cursor: pointer;
-      transition: background .2s; display: flex; align-items: center;
-      justify-content: center; gap: 8px;
-    }
-    .btn-green { background: #238636; }
-    .btn-green:hover { background: #2ea043; }
-    .btn-green:disabled { background: #21262d; color: #484f58; cursor: not-allowed; }
+    .btn { width: 100%; padding: 14px; border: none; border-radius: 10px; color: #fff; font-size: 1rem; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; background: #238636; transition: background .2s; }
+    .btn:hover { background: #2ea043; }
+    .btn:disabled { background: #21262d; color: #484f58; cursor: not-allowed; }
     #status { display: none; border-radius: 10px; padding: 16px 18px; font-size: .88rem; line-height: 1.7; margin-top: 16px; }
     #status.success { background: #0d4429; border: 1px solid #238636; color: #3fb950; display: block; }
     #status.error   { background: #300d0d; border: 1px solid #f85149; color: #f85149; display: block; }
     #status.info    { background: #1c2128; border: 1px solid #388bfd; color: #79c0ff; display: block; }
     #status a { color: inherit; }
     @keyframes spin { to { transform: rotate(360deg); } }
-    .spinner { width: 18px; height: 18px; border: 2px solid rgba(255,255,255,.2); border-top-color: #fff; border-radius: 50%; animation: spin .7s linear infinite; }
+    .spinner { width: 18px; height: 18px; border: 2px solid rgba(255,255,255,.2); border-top-color: #fff; border-radius: 50%; animation: spin .7s linear infinite; display:inline-block; }
   </style>
 </head>
 <body>
 
 <div class="header">
-  <div class="icon">&#127957;</div>
+  <div style="font-size:48px">&#127957;</div>
   <h1>Shelter Booker</h1>
   <p>Schedule a Naturstyrelsen booking while you sleep.</p>
 </div>
@@ -149,356 +117,367 @@
 </div>
 
 <div style="max-width:560px;width:100%;">
-  <button class="btn btn-green" id="scheduleBtn" onclick="scheduleBooking()">
+  <button class="btn" id="scheduleBtn" onclick="scheduleBooking()">
     &#128640; Schedule Booking
   </button>
   <div id="status"></div>
 </div>
 
 <script>
-(function () {
-  'use strict';
+// NOTE: This file intentionally uses zero backticks and no template literals
+// to avoid conflicts with embedded Python/YAML content.
 
-  var PERSIST = ['ghUser','ghToken','fornavn','efternavn','email','telefon'];
+var PERSIST = ['ghUser','ghToken','fornavn','efternavn','email','telefon'];
 
-  function saveAll() {
-    PERSIST.forEach(function(id) {
-      var el = document.getElementById(id);
-      try { if (el) localStorage.setItem('sb_' + id, el.value); } catch(e) {}
-    });
-    updateBadge();
+function saveAll() {
+  for (var i = 0; i < PERSIST.length; i++) {
+    var el = document.getElementById(PERSIST[i]);
+    try { if (el) localStorage.setItem('sb_' + PERSIST[i], el.value); } catch(e) {}
   }
+  updateBadge();
+}
 
-  function loadAll() {
-    PERSIST.forEach(function(id) {
-      var el = document.getElementById(id);
-      if (!el) return;
-      try {
-        var v = localStorage.getItem('sb_' + id);
-        if (v !== null) el.value = v;
-      } catch(e) {}
-    });
-    updateBadge();
-  }
-
-  function updateBadge() {
+function loadAll() {
+  for (var i = 0; i < PERSIST.length; i++) {
+    var el = document.getElementById(PERSIST[i]);
+    if (!el) continue;
     try {
-      var ok = localStorage.getItem('sb_ghUser') && localStorage.getItem('sb_ghToken');
-      var b = document.getElementById('savedBadge');
-      if (b) b.style.display = ok ? 'inline-block' : 'none';
+      var v = localStorage.getItem('sb_' + PERSIST[i]);
+      if (v !== null) el.value = v;
     } catch(e) {}
   }
+  updateBadge();
+}
 
-  window.addEventListener('DOMContentLoaded', function() {
-    loadAll();
-    PERSIST.forEach(function(id) {
+function updateBadge() {
+  try {
+    var ok = localStorage.getItem('sb_ghUser') && localStorage.getItem('sb_ghToken');
+    var b = document.getElementById('savedBadge');
+    if (b) b.style.display = ok ? 'inline-block' : 'none';
+  } catch(e) {}
+}
+
+window.addEventListener('DOMContentLoaded', function() {
+  loadAll();
+  for (var i = 0; i < PERSIST.length; i++) {
+    (function(id) {
       var el = document.getElementById(id);
       if (el) el.addEventListener('input', saveAll);
-    });
-  });
-
-  function val(id) {
-    var el = document.getElementById(id);
-    return el ? el.value.trim() : '';
+    })(PERSIST[i]);
   }
+});
 
-  function setStatus(msg, type) {
-    var el = document.getElementById('status');
-    el.className = type;
-    el.innerHTML = msg;
-  }
+function val(id) {
+  var el = document.getElementById(id);
+  return el ? el.value.trim() : '';
+}
 
-  function setLoading(on) {
-    var btn = document.getElementById('scheduleBtn');
-    btn.disabled = on;
-    btn.innerHTML = on
-      ? '<div class="spinner"></div> Saving to GitHub...'
-      : '&#128640; Schedule Booking';
-  }
+function setStatus(msg, type) {
+  var el = document.getElementById('status');
+  el.className = type;
+  el.innerHTML = msg;
+}
 
-  function toCronUTC(dateStr, timeStr) {
-    var dt = new Date(dateStr + 'T' + timeStr + ':00');
-    return dt.getUTCMinutes() + ' ' + dt.getUTCHours() + ' ' +
-           dt.getUTCDate() + ' ' + (dt.getUTCMonth()+1) + ' *';
-  }
+function setLoading(on) {
+  var btn = document.getElementById('scheduleBtn');
+  btn.disabled = on;
+  btn.innerHTML = on ? '<div class="spinner"></div> Saving to GitHub...' : '&#128640; Schedule Booking';
+}
 
-  function danishMonth(dateStr) {
-    var m = ['Januar','Februar','Marts','April','Maj','Juni',
-             'Juli','August','September','Oktober','November','December'];
-    return m[new Date(dateStr).getMonth()];
-  }
+function toCronUTC(dateStr, timeStr) {
+  var dt = new Date(dateStr + 'T' + timeStr + ':00');
+  return dt.getUTCMinutes() + ' ' + dt.getUTCHours() + ' ' + dt.getUTCDate() + ' ' + (dt.getUTCMonth()+1) + ' *';
+}
 
-  function hdrs(token) {
-    return {
-      'Authorization': 'token ' + token,
-      'Accept': 'application/vnd.github.v3+json',
-      'Content-Type': 'application/json'
-    };
-  }
+function danishMonth(dateStr) {
+  var m = ['Januar','Februar','Marts','April','Maj','Juni','Juli','August','September','Oktober','November','December'];
+  return m[new Date(dateStr).getMonth()];
+}
 
-  async function getDefaultBranch(user, token, repo) {
-    var r = await fetch('https://api.github.com/repos/' + user + '/' + repo, { headers: hdrs(token) });
-    if (!r.ok) { var e = await r.json(); throw new Error('Repo error: ' + e.message); }
-    return (await r.json()).default_branch || 'main';
-  }
+function ghHeaders(token) {
+  return { 'Authorization': 'token ' + token, 'Accept': 'application/vnd.github.v3+json', 'Content-Type': 'application/json' };
+}
 
-  async function getSha(user, token, repo, path, branch) {
-    try {
-      var r = await fetch('https://api.github.com/repos/' + user + '/' + repo + '/contents/' + path + '?ref=' + branch, { headers: hdrs(token) });
-      if (r.ok) return (await r.json()).sha || null;
-    } catch(e) {}
-    return null;
-  }
+async function getDefaultBranch(user, token, repo) {
+  var r = await fetch('https://api.github.com/repos/' + user + '/' + repo, { headers: ghHeaders(token) });
+  if (!r.ok) { var e = await r.json(); throw new Error('Repo error: ' + e.message); }
+  return (await r.json()).default_branch || 'main';
+}
 
-  async function ghPut(user, token, repo, path, content, msg, branch) {
-    var url = 'https://api.github.com/repos/' + user + '/' + repo + '/contents/' + path;
-    var enc = btoa(unescape(encodeURIComponent(content)));
+async function getFileSha(user, token, repo, filePath, branch) {
+  try {
+    var r = await fetch('https://api.github.com/repos/' + user + '/' + repo + '/contents/' + filePath + '?ref=' + branch, { headers: ghHeaders(token) });
+    if (r.ok) return (await r.json()).sha || null;
+  } catch(e) {}
+  return null;
+}
 
-    var mkBody = function(sha) {
-      var b = { message: msg, content: enc, branch: branch };
-      if (sha) b.sha = sha;
-      return JSON.stringify(b);
-    };
+async function ghPut(user, token, repo, filePath, content, msg, branch) {
+  var url = 'https://api.github.com/repos/' + user + '/' + repo + '/contents/' + filePath;
+  var enc = btoa(unescape(encodeURIComponent(content)));
+  var sha = await getFileSha(user, token, repo, filePath, branch);
 
-    var sha = await getSha(user, token, repo, path, branch);
-    var r = await fetch(url, { method: 'PUT', headers: hdrs(token), body: mkBody(sha) });
-
-    if (r.status === 422) {
-      sha = await getSha(user, token, repo, path, branch);
-      r = await fetch(url, { method: 'PUT', headers: hdrs(token), body: mkBody(sha) });
-    }
-
-    if (!r.ok) { var e = await r.json(); throw new Error('Failed "' + path + '": ' + e.message); }
-    return r.json();
-  }
-
-  function buildYaml(cron) {
-    var L = [
-      'name: Book Shelter','',
-      'on:','  schedule:',
-      "    - cron: '" + cron + "'",
-      '  workflow_dispatch:','',
-      'jobs:','  book:','    runs-on: ubuntu-latest','    steps:',
-      '      - uses: actions/checkout@v4','',
-      '      - uses: actions/setup-python@v5',
-      '        with:',
-      "          python-version: '3.12'",'',
-      '      - name: Install dependencies','        run: |',
-      '          pip install playwright',
-      '          playwright install chromium --with-deps','',
-      '      - name: Run booking agent',
-      '        run: python book_shelter.py','',
-      '      - name: Upload screenshot','        if: always()',
-      '        uses: actions/upload-artifact@v4','        with:',
-      '          name: booking-screenshot','          path: "*.png"',
-      '          if-no-files-found: ignore'
-    ];
-    return L.join('\n');
-  }
-
-  function buildPython() {
-    var L = [
-      'import asyncio, re, json',
-      'from datetime import datetime',
-      'from playwright.async_api import async_playwright',
-      '',
-      "with open('config.json') as f:",
-      '    cfg = json.load(f)',
-      '',
-      "DATA         = cfg['data']",
-      "TARGET_URL   = cfg['shelterUrl']",
-      "TARGET_DAY   = cfg['targetDay']",
-      "TARGET_MONTH = cfg['targetMonth']",
-      'MAX_ATTEMPTS = 5',
-      '',
-      'COOKIE_BTN = "#CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll"',
-      "SUBMIT_SELECTORS = ['a.place-submitbtn', '.place-submitbtn', \"a:has-text('Book nu')\"]",
-      '',
-      'def log(msg):',
-      '    print(f"[{datetime.now().strftime(\\\"%H:%M:%S\\\")}] {msg}", flush=True)',
-      '',
-      'async def accept_cookies(page):',
-      '    try:',
-      '        await page.click(COOKIE_BTN, timeout=3000)',
-      '        log("Cookies accepted.")',
-      '    except Exception:',
-      '        pass',
-      '',
-      'async def navigate_to_month(page, target_month):',
-      '    log(f"Navigating to {target_month}...")',
-      '    next_btn = page.locator("i.fa-chevron-right").first',
-      '    for _ in range(18):',
-      '        header = await page.locator(".calendar-header").inner_text()',
-      '        if target_month.lower() in header.lower():',
-      '            log(f"Arrived at {target_month}!")',
-      '            return',
-      '        await next_btn.click()',
-      '        await asyncio.sleep(0.4)',
-      '    raise RuntimeError(f"Could not find month: {target_month}")',
-      '',
-      'async def click_day(page, day):',
-      '    log(f"Looking for day {day}...")',
-      '    day_divs = page.locator("div.day").filter(',
-      '        has_text=re.compile(rf"^\s*{re.escape(day)}\s*$")',
-      '    )',
-      '    count = await day_divs.count()',
-      '    if count == 0:',
-      '        raise RuntimeError(f"Day {day} not found!")',
-      '    clicked = False',
-      '    for i in range(count):',
-      '        div = day_divs.nth(i)',
-      '        td_class = await div.locator("xpath=ancestor::td[1]").get_attribute("class") or ""',
-      '        if "day-overlay-occupied" in td_class or "td-disabled" in td_class:',
-      '            log(f"  Cell {i+1} booked, skipping")',
-      '            continue',
-      '        log(f"  Cell {i+1} available - clicking!")',
-      '        await div.click(force=True)',
-      '        clicked = True',
-      '        break',
-      '    if not clicked:',
-      '        raise RuntimeError(f"Day {day} is fully booked!")',
-      '    try:',
-      "        await page.wait_for_function(\"() => document.body.innerText.includes('Fra:')\", timeout=6000)",
-      '        log("Date selection confirmed!")',
-      '    except Exception:',
-      '        log("Fra: not detected - continuing...")',
-      '    await asyncio.sleep(0.8)',
-      '',
-      'async def fill_email_confirm(page, email):',
-      '    field = page.locator("#EmailConfirm")',
-      '    await field.click()',
-      '    await field.press("Control+a")',
-      '    await field.press("Delete")',
-      '    await page.keyboard.type(email, delay=40)',
-      '    el = await page.query_selector("#EmailConfirm")',
-      '    await page.evaluate(',
-      "        \"el => { ['input','change','blur'].forEach(e => el.dispatchEvent(new Event(e,{bubbles:true}))); }\",",
-      '        el',
-      '    )',
-      '',
-      'async def fill_fields(page):',
-      '    log("Waiting for form...")',
-      '    await page.wait_for_selector("div.place-form-wrapper", state="visible", timeout=8000)',
-      '    await page.fill("#Firstname",    DATA["fornavn"])',
-      '    await page.fill("#Lastname",     DATA["efternavn"])',
-      '    await page.fill("#Email",        DATA["email"])',
-      '    await fill_email_confirm(page,   DATA["email"])',
-      '    await page.fill("#Phone",        DATA["telefon"])',
-      "    await page.select_option(\"select[name='B_Count']\", value=DATA['antal'])",
-      "    await page.check(\"input[name='B_Confirm']\")",
-      '    log("Form filled!")',
-      '',
-      'async def click_submit(page):',
-      '    for sel in SUBMIT_SELECTORS:',
-      '        try:',
-      '            btn = page.locator(sel).first',
-      '            if await btn.is_visible():',
-      '                log(f"Clicking: {sel}")',
-      '                await btn.click()',
-      '                return True',
-      '        except Exception:',
-      '            continue',
-      '    return False',
-      '',
-      'async def book_shelter():',
-      '    async with async_playwright() as p:',
-      '        browser = await p.chromium.launch(headless=True, slow_mo=60)',
-      '        page = await browser.new_page()',
-      '        log(f"Opening {TARGET_URL}")',
-      '        await page.goto(TARGET_URL)',
-      '        await accept_cookies(page)',
-      '        for attempt in range(1, MAX_ATTEMPTS + 1):',
-      '            try:',
-      '                log(f"Attempt {attempt}/{MAX_ATTEMPTS}")',
-      '                await page.reload()',
-      '                await asyncio.sleep(1.5)',
-      '                await accept_cookies(page)',
-      '                await navigate_to_month(page, TARGET_MONTH)',
-      '                await click_day(page, TARGET_DAY)',
-      '                await fill_fields(page)',
-      '                if not await click_submit(page):',
-      '                    raise RuntimeError("Submit button not found!")',
-      '                await asyncio.sleep(3)',
-      '                body = (await page.content()).lower()',
-      '                done = any(k in body for k in ["bekraeftelse","tak","booket","succes","kvittering"])',
-      "                log(f\"CONFIRMED! Check {DATA['email']}\" if done else f\"Submitted - check {DATA['email']}\")",
-      '                ts = datetime.now().strftime("%H%M%S")',
-      '                await page.screenshot(path=f"booking_{ts}.png", full_page=True)',
-      '                log("ALL DONE!")',
-      '                break',
-      '            except Exception as e:',
-      '                log(f"Attempt {attempt} failed: {e}")',
-      '                try:',
-      '                    await page.screenshot(path=f"error_{attempt}.png", full_page=True)',
-      '                except Exception:',
-      '                    pass',
-      '                if attempt < MAX_ATTEMPTS:',
-      '                    await asyncio.sleep(2)',
-      '                else:',
-      '                    log("All attempts exhausted.")',
-      '        await browser.close()',
-      '',
-      'if __name__ == "__main__":',
-      '    log(f"Booking {TARGET_DAY} {TARGET_MONTH} on {TARGET_URL}")',
-      '    asyncio.run(book_shelter())',
-    ]
-    return '\n'.join(L)
-
-  window.scheduleBooking = async function() {
-    var ghUser    = val('ghUser');
-    var ghToken   = val('ghToken');
-    var url       = val('shelterUrl');
-    var dateStr   = val('bookDate');
-    var timeStr   = val('fireTime');
-    var fornavn   = val('fornavn');
-    var efternavn = val('efternavn');
-    var email     = val('email');
-    var telefon   = val('telefon');
-    var antal     = val('antal');
-
-    if (!ghUser||!ghToken||!url||!dateStr||!fornavn||!email||!telefon) {
-      setStatus('Please fill in all fields.', 'error'); return;
-    }
-    setLoading(true);
-    try {
-      setStatus('Connecting to GitHub...', 'info');
-      var branch = await getDefaultBranch(ghUser, ghToken, 'shelter-booker');
-      var day    = String(new Date(dateStr).getDate());
-      var month  = danishMonth(dateStr);
-      var cron   = toCronUTC(dateStr, timeStr);
-
-      setStatus('Saving config...', 'info');
-      var cfg = { shelterUrl:url, targetDay:day, targetMonth:month, fireTime:timeStr+':00',
-                  data:{fornavn:fornavn,efternavn:efternavn,email:email,telefon:telefon,antal:antal} };
-      await ghPut(ghUser,ghToken,'shelter-booker','config.json', JSON.stringify(cfg,null,2), 'Update config', branch);
-
-      setStatus('Creating folder structure...', 'info');
-      await ghPut(ghUser,ghToken,'shelter-booker','.github/.gitkeep','','Create .github folder',branch);
-      await ghPut(ghUser,ghToken,'shelter-booker','.github/workflows/.gitkeep','','Create workflows folder',branch);
-
-      setStatus('Setting up GitHub Actions...', 'info');
-      await ghPut(ghUser,ghToken,'shelter-booker','.github/workflows/book.yml', buildYaml(cron), 'Schedule workflow', branch);
-
-      setStatus('Uploading booking script...', 'info');
-      await ghPut(ghUser,ghToken,'shelter-booker','book_shelter.py', buildPython(), 'Update script', branch);
-
-      var d = new Date(dateStr);
-      var friendly = d.toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
-      setStatus(
-        '<strong>&#10003; Booking scheduled!</strong><br><br>' +
-        'Date: <strong>' + friendly + '</strong> at <strong>' + timeStr + '</strong><br>' +
-        'Shelter: <a href="' + url + '" target="_blank">' + url + '</a><br><br>' +
-        'GitHub Actions will book it and send confirmation to <strong>' + email + '</strong>.<br><br>' +
-        '<a href="https://github.com/' + ghUser + '/shelter-booker/actions" target="_blank">Watch it on GitHub Actions &rarr;</a>',
-        'success'
-      );
-    } catch(err) {
-      setStatus('&#10060; ' + err.message, 'error');
-    }
-    setLoading(false);
+  var makeBody = function(s) {
+    var b = { message: msg, content: enc, branch: branch };
+    if (s) b.sha = s;
+    return JSON.stringify(b);
   };
 
-}());
+  var r = await fetch(url, { method: 'PUT', headers: ghHeaders(token), body: makeBody(sha) });
+  if (r.status === 422) {
+    sha = await getFileSha(user, token, repo, filePath, branch);
+    r = await fetch(url, { method: 'PUT', headers: ghHeaders(token), body: makeBody(sha) });
+  }
+  if (!r.ok) { var e = await r.json(); throw new Error('Failed "' + filePath + '": ' + e.message); }
+  return r.json();
+}
+
+// ── Build files ─────────────────────────────────────────────────────────────
+
+function buildYaml(cron) {
+  var NL = '\n';
+  return 'name: Book Shelter' + NL +
+    NL +
+    'on:' + NL +
+    '  schedule:' + NL +
+    "    - cron: '" + cron + "'" + NL +
+    '  workflow_dispatch:' + NL +
+    NL +
+    'jobs:' + NL +
+    '  book:' + NL +
+    '    runs-on: ubuntu-latest' + NL +
+    '    steps:' + NL +
+    '      - uses: actions/checkout@v4' + NL +
+    NL +
+    '      - uses: actions/setup-python@v5' + NL +
+    '        with:' + NL +
+    "          python-version: '3.12'" + NL +
+    NL +
+    '      - name: Install dependencies' + NL +
+    '        run: |' + NL +
+    '          pip install playwright' + NL +
+    '          playwright install chromium --with-deps' + NL +
+    NL +
+    '      - name: Run booking agent' + NL +
+    '        run: python book_shelter.py' + NL +
+    NL +
+    '      - name: Upload screenshot' + NL +
+    '        if: always()' + NL +
+    '        uses: actions/upload-artifact@v4' + NL +
+    '        with:' + NL +
+    '          name: booking-screenshot' + NL +
+    '          path: "*.png"' + NL +
+    '          if-no-files-found: ignore' + NL;
+}
+
+function buildPython() {
+  var NL = '\n';
+  return 'import asyncio, re, json' + NL +
+    'from datetime import datetime' + NL +
+    'from playwright.async_api import async_playwright' + NL +
+    NL +
+    "with open('config.json') as f:" + NL +
+    '    cfg = json.load(f)' + NL +
+    NL +
+    "DATA         = cfg['data']" + NL +
+    "TARGET_URL   = cfg['shelterUrl']" + NL +
+    "TARGET_DAY   = cfg['targetDay']" + NL +
+    "TARGET_MONTH = cfg['targetMonth']" + NL +
+    'MAX_ATTEMPTS = 5' + NL +
+    NL +
+    'COOKIE_BTN = "#CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll"' + NL +
+    "SUBMIT_SELECTORS = ['a.place-submitbtn', '.place-submitbtn', \"a:has-text('Book nu')\"]" + NL +
+    NL +
+    'def log(msg):' + NL +
+    '    print(f"[{datetime.now().strftime(\'%H:%M:%S\')}] {msg}", flush=True)' + NL +
+    NL +
+    'async def accept_cookies(page):' + NL +
+    '    try:' + NL +
+    '        await page.click(COOKIE_BTN, timeout=3000)' + NL +
+    '        log("Cookies accepted.")' + NL +
+    '    except Exception:' + NL +
+    '        pass' + NL +
+    NL +
+    'async def navigate_to_month(page, target_month):' + NL +
+    '    log(f"Navigating to {target_month}...")' + NL +
+    '    next_btn = page.locator("i.fa-chevron-right").first' + NL +
+    '    for _ in range(18):' + NL +
+    '        header = await page.locator(".calendar-header").inner_text()' + NL +
+    '        if target_month.lower() in header.lower():' + NL +
+    '            log(f"Arrived at {target_month}!")' + NL +
+    '            return' + NL +
+    '        await next_btn.click()' + NL +
+    '        await asyncio.sleep(0.4)' + NL +
+    '    raise RuntimeError(f"Could not find month: {target_month}")' + NL +
+    NL +
+    'async def click_day(page, day):' + NL +
+    '    log(f"Looking for day {day}...")' + NL +
+    '    pattern = re.compile(r"^\\s*" + day + r"\\s*$")' + NL +
+    '    day_divs = page.locator("div.day").filter(has_text=pattern)' + NL +
+    '    count = await day_divs.count()' + NL +
+    '    if count == 0:' + NL +
+    '        raise RuntimeError(f"Day {day} not found!")' + NL +
+    '    clicked = False' + NL +
+    '    for i in range(count):' + NL +
+    '        div = day_divs.nth(i)' + NL +
+    '        td_class = await div.locator("xpath=ancestor::td[1]").get_attribute("class") or ""' + NL +
+    '        if "day-overlay-occupied" in td_class or "td-disabled" in td_class:' + NL +
+    '            log(f"  Cell {i+1} booked, skipping")' + NL +
+    '            continue' + NL +
+    '        log(f"  Cell {i+1} available - clicking!")' + NL +
+    '        await div.click(force=True)' + NL +
+    '        clicked = True' + NL +
+    '        break' + NL +
+    '    if not clicked:' + NL +
+    '        raise RuntimeError(f"Day {day} is fully booked!")' + NL +
+    '    try:' + NL +
+    "        await page.wait_for_function(\"() => document.body.innerText.includes('Fra:')\", timeout=6000)" + NL +
+    '        log("Date selection confirmed!")' + NL +
+    '    except Exception:' + NL +
+    '        log("Fra: not detected - continuing...")' + NL +
+    '    await asyncio.sleep(0.8)' + NL +
+    NL +
+    'async def fill_email_confirm(page, email):' + NL +
+    '    field = page.locator("#EmailConfirm")' + NL +
+    '    await field.click()' + NL +
+    '    await field.press("Control+a")' + NL +
+    '    await field.press("Delete")' + NL +
+    '    await page.keyboard.type(email, delay=40)' + NL +
+    '    el = await page.query_selector("#EmailConfirm")' + NL +
+    '    await page.evaluate(' + NL +
+    "        \"el => { ['input','change','blur'].forEach(e => el.dispatchEvent(new Event(e,{bubbles:true}))); }\"," + NL +
+    '        el' + NL +
+    '    )' + NL +
+    NL +
+    'async def fill_fields(page):' + NL +
+    '    log("Waiting for form...")' + NL +
+    '    await page.wait_for_selector("div.place-form-wrapper", state="visible", timeout=8000)' + NL +
+    '    await page.fill("#Firstname",    DATA["fornavn"])' + NL +
+    '    await page.fill("#Lastname",     DATA["efternavn"])' + NL +
+    '    await page.fill("#Email",        DATA["email"])' + NL +
+    '    await fill_email_confirm(page,   DATA["email"])' + NL +
+    '    await page.fill("#Phone",        DATA["telefon"])' + NL +
+    "    await page.select_option(\"select[name='B_Count']\", value=DATA['antal'])" + NL +
+    "    await page.check(\"input[name='B_Confirm']\")" + NL +
+    '    log("Form filled!")' + NL +
+    NL +
+    'async def click_submit(page):' + NL +
+    '    for sel in SUBMIT_SELECTORS:' + NL +
+    '        try:' + NL +
+    '            btn = page.locator(sel).first' + NL +
+    '            if await btn.is_visible():' + NL +
+    '                log(f"Clicking: {sel}")' + NL +
+    '                await btn.click()' + NL +
+    '                return True' + NL +
+    '        except Exception:' + NL +
+    '            continue' + NL +
+    '    return False' + NL +
+    NL +
+    'async def book_shelter():' + NL +
+    '    async with async_playwright() as p:' + NL +
+    '        browser = await p.chromium.launch(headless=True, slow_mo=60)' + NL +
+    '        page = await browser.new_page()' + NL +
+    '        log(f"Opening {TARGET_URL}")' + NL +
+    '        await page.goto(TARGET_URL)' + NL +
+    '        await accept_cookies(page)' + NL +
+    '        for attempt in range(1, MAX_ATTEMPTS + 1):' + NL +
+    '            try:' + NL +
+    '                log(f"Attempt {attempt}/{MAX_ATTEMPTS}")' + NL +
+    '                await page.reload()' + NL +
+    '                await asyncio.sleep(1.5)' + NL +
+    '                await accept_cookies(page)' + NL +
+    '                await navigate_to_month(page, TARGET_MONTH)' + NL +
+    '                await click_day(page, TARGET_DAY)' + NL +
+    '                await fill_fields(page)' + NL +
+    '                if not await click_submit(page):' + NL +
+    '                    raise RuntimeError("Submit button not found!")' + NL +
+    '                await asyncio.sleep(3)' + NL +
+    '                body = (await page.content()).lower()' + NL +
+    '                done = any(k in body for k in ["bekraeftelse","tak","booket","succes","kvittering"])' + NL +
+    '                log(f"CONFIRMED! Check {DATA[\'email\']}" if done else f"Submitted - check {DATA[\'email\']}")' + NL +
+    '                ts = datetime.now().strftime("%H%M%S")' + NL +
+    '                await page.screenshot(path=f"booking_{ts}.png", full_page=True)' + NL +
+    '                log("ALL DONE!")' + NL +
+    '                break' + NL +
+    '            except Exception as e:' + NL +
+    '                log(f"Attempt {attempt} failed: {e}")' + NL +
+    '                try:' + NL +
+    '                    await page.screenshot(path=f"error_{attempt}.png", full_page=True)' + NL +
+    '                except Exception:' + NL +
+    '                    pass' + NL +
+    '                if attempt < MAX_ATTEMPTS:' + NL +
+    '                    await asyncio.sleep(2)' + NL +
+    '                else:' + NL +
+    '                    log("All attempts exhausted.")' + NL +
+    '        await browser.close()' + NL +
+    NL +
+    'if __name__ == "__main__":' + NL +
+    '    log(f"Booking {TARGET_DAY} {TARGET_MONTH} on {TARGET_URL}")' + NL +
+    '    asyncio.run(book_shelter())' + NL;
+}
+
+// ── Main ─────────────────────────────────────────────────────────────────────
+
+async function scheduleBooking() {
+  var ghUser    = val('ghUser');
+  var ghToken   = val('ghToken');
+  var url       = val('shelterUrl');
+  var dateStr   = val('bookDate');
+  var timeStr   = val('fireTime');
+  var fornavn   = val('fornavn');
+  var efternavn = val('efternavn');
+  var email     = val('email');
+  var telefon   = val('telefon');
+  var antal     = val('antal');
+
+  if (!ghUser || !ghToken || !url || !dateStr || !fornavn || !email || !telefon) {
+    setStatus('Please fill in all fields.', 'error');
+    return;
+  }
+
+  setLoading(true);
+
+  try {
+    setStatus('Connecting to GitHub...', 'info');
+    var branch = await getDefaultBranch(ghUser, ghToken, 'shelter-booker');
+
+    var day   = String(new Date(dateStr).getDate());
+    var month = danishMonth(dateStr);
+    var cron  = toCronUTC(dateStr, timeStr);
+
+    setStatus('Saving config...', 'info');
+    var cfg = {
+      shelterUrl: url, targetDay: day, targetMonth: month, fireTime: timeStr + ':00',
+      data: { fornavn: fornavn, efternavn: efternavn, email: email, telefon: telefon, antal: antal }
+    };
+    await ghPut(ghUser, ghToken, 'shelter-booker', 'config.json', JSON.stringify(cfg, null, 2), 'Update config', branch);
+
+    setStatus('Creating folder structure...', 'info');
+    await ghPut(ghUser, ghToken, 'shelter-booker', '.github/.gitkeep',           '', 'Create .github folder',    branch);
+    await ghPut(ghUser, ghToken, 'shelter-booker', '.github/workflows/.gitkeep', '', 'Create workflows folder',  branch);
+
+    setStatus('Setting up GitHub Actions...', 'info');
+    await ghPut(ghUser, ghToken, 'shelter-booker', '.github/workflows/book.yml', buildYaml(cron), 'Schedule workflow', branch);
+
+    setStatus('Uploading booking script...', 'info');
+    await ghPut(ghUser, ghToken, 'shelter-booker', 'book_shelter.py', buildPython(), 'Update script', branch);
+
+    var d = new Date(dateStr);
+    var friendly = d.toLocaleDateString('en-GB', { weekday:'long', day:'numeric', month:'long', year:'numeric' });
+    setStatus(
+      '<strong>&#10003; Booking scheduled!</strong><br><br>' +
+      'Date: <strong>' + friendly + '</strong> at <strong>' + timeStr + '</strong><br>' +
+      'Shelter: <a href="' + url + '" target="_blank">' + url + '</a><br><br>' +
+      'GitHub Actions will book it and send confirmation to <strong>' + email + '</strong>.<br><br>' +
+      '<a href="https://github.com/' + ghUser + '/shelter-booker/actions" target="_blank">Watch it on GitHub Actions &rarr;</a>',
+      'success'
+    );
+  } catch(err) {
+    setStatus('&#10060; ' + err.message, 'error');
+  }
+
+  setLoading(false);
+}
 </script>
 </body>
 </html>
