@@ -224,7 +224,7 @@ async function ghPut(user, token, repo, filePath, content, msg, branch) {
   };
 
   var r = await fetch(url, { method: 'PUT', headers: ghHeaders(token), body: makeBody(sha) });
-  if (r.status === 422) {
+  if (r.status === 422 || r.status === 409) {
     sha = await getFileSha(user, token, repo, filePath, branch);
     r = await fetch(url, { method: 'PUT', headers: ghHeaders(token), body: makeBody(sha) });
   }
