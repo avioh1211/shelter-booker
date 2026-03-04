@@ -452,9 +452,6 @@ async function scheduleBooking() {
     };
     await ghPut(ghUser, ghToken, 'shelter-booker', 'config.json', JSON.stringify(cfg, null, 2), 'Update config', branch);
 
-    setStatus('Creating folder structure...', 'info');
-    await ghPut(ghUser, ghToken, 'shelter-booker', '.github/.gitkeep',           '', 'Create .github folder',    branch);
-    await ghPut(ghUser, ghToken, 'shelter-booker', '.github/workflows/.gitkeep', '', 'Create workflows folder',  branch);
 
     setStatus('Setting up GitHub Actions...', 'info');
     await ghPut(ghUser, ghToken, 'shelter-booker', '.github/workflows/book.yml', buildYaml(cron), 'Schedule workflow', branch);
