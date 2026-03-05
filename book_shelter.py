@@ -9,6 +9,7 @@ DATA         = cfg['data']
 TARGET_URL   = cfg['shelterUrl']
 TARGET_DAY   = cfg['targetDay']
 TARGET_MONTH = cfg['targetMonth']
+FIRE_TIME    = cfg['fireTime']
 MAX_ATTEMPTS = 5
 
 COOKIE_BTN = "#CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll"
@@ -36,8 +37,44 @@ async def navigate_to_month(page, target_month):
         await asyncio.sleep(0.4)
     raise RuntimeError(f"Could not find month: {target_month}")
 
+async def is_day_available(page, day):
+    """Returns True when the target day has no td-disabled class — meaning it just opened."""
+    pattern = re.compile(r"^\s*" + re.escape(day) + r"\s*$")
+    day_divs = page.locator("div.day").filter(has_text=pattern)
+    count = await day_divs.count()
+    for i in range(count):
+        div = day_divs.nth(i)
+        td_class = await div.locator("xpath=ancestor::td[1]").get_attribute("class") or ""
+        if "td-disabled" not in td_class and "day-overlay-occupied" not in td_class:
+            return True
+    return False
+
+async def wait_for_day_to_open(page):
+    """Poll the calendar every 2 seconds until the target day loses td-disabled."""
+    log(f"Waiting for day {TARGET_DAY} {TARGET_MONTH} to open for booking...")
+    log("Polling every 2 seconds — will book the instant it opens!")
+    polls = 0
+    while True:
+        try:
+            available = await is_day_available(page, TARGET_DAY)
+            if available:
+                log(f"DAY IS NOW OPEN! Booking immediately!")
+                return
+            polls += 1
+            if polls % 15 == 0:  # log every 30 seconds
+                log(f"Still waiting... ({polls * 2}s elapsed)")
+            # Reload page every 30 seconds to get fresh data
+            if polls % 15 == 0:
+                await page.reload()
+                await asyncio.sleep(1)
+                await accept_cookies(page)
+                await navigate_to_month(page, TARGET_MONTH)
+        except Exception as e:
+            log(f"Poll error: {e}")
+        await asyncio.sleep(2)
+
 async def click_day(page, day):
-    log(f"Looking for day {day}...")
+    log(f"Clicking day {day}...")
     pattern = re.compile(r"^\s*" + re.escape(day) + r"\s*$")
     day_divs = page.locator("div.day").filter(has_text=pattern)
     count = await day_divs.count()
@@ -47,15 +84,15 @@ async def click_day(page, day):
     for i in range(count):
         div = day_divs.nth(i)
         td_class = await div.locator("xpath=ancestor::td[1]").get_attribute("class") or ""
-        if "day-overlay-occupied" in td_class or "td-disabled" in td_class:
-            log(f"  Cell {i+1} booked, skipping")
+        if "td-disabled" in td_class or "day-overlay-occupied" in td_class:
+            log(f"  Cell {i+1} not available, skipping")
             continue
         log(f"  Cell {i+1} available - clicking!")
         await div.click(force=True)
         clicked = True
         break
     if not clicked:
-        raise RuntimeError(f"Day {day} is fully booked!")
+        raise RuntimeError(f"Day {day} not available!")
     try:
         await page.wait_for_function("() => document.body.innerText.includes('Fra:')", timeout=6000)
         log("Date selection confirmed!")
@@ -76,7 +113,7 @@ async def fill_email_confirm(page, email):
         }""",
         email
     )
-    log("EmailConfirm set via JS")
+    log("Email2 set via JS")
 
 async def fill_fields(page):
     log("Waiting for form...")
@@ -86,7 +123,7 @@ async def fill_fields(page):
     await page.fill("#Email",      DATA["email"])
     await fill_email_confirm(page, DATA["email"])
     await page.fill("#Phone",      DATA["telefon"])
-    await page.fill("#PeopleQuantity", DATA['antal'])
+    await page.fill("#PeopleQuantity", DATA["antal"])
     await page.check("input[name='B_Confirm']")
     await page.check("input[name='B_ConfirmPrivacy']")
     log("Form filled!")
@@ -110,13 +147,19 @@ async def book_shelter():
         log(f"Opening {TARGET_URL}")
         await page.goto(TARGET_URL)
         await accept_cookies(page)
+        await navigate_to_month(page, TARGET_MONTH)
+
+        # Poll until the day opens (handles exact midnight opening automatically)
+        await wait_for_day_to_open(page)
+
         for attempt in range(1, MAX_ATTEMPTS + 1):
             try:
                 log(f"Attempt {attempt}/{MAX_ATTEMPTS}")
-                await page.reload()
-                await asyncio.sleep(1.5)
-                await accept_cookies(page)
-                await navigate_to_month(page, TARGET_MONTH)
+                if attempt > 1:
+                    await page.reload()
+                    await asyncio.sleep(1)
+                    await accept_cookies(page)
+                    await navigate_to_month(page, TARGET_MONTH)
                 await click_day(page, TARGET_DAY)
                 await fill_fields(page)
                 if not await click_submit(page):
