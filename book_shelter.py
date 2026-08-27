@@ -44,6 +44,8 @@ def send_notification(subject, message):
         body += f"\n\nFull run (with screenshots): {RUN_URL}"
     payload = json.dumps({
         "_subject": subject,
+        "_captcha": False,   # required for server-side/no-browser submissions — FormSubmit's
+                              # default reCAPTCHA silently drops requests with no browser interaction
         "message": body,
     }).encode("utf-8")
     req = urllib.request.Request(
