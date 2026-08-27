@@ -33,6 +33,7 @@ jobs:
         run: |
           pip install playwright
           playwright install chromium --with-deps
+
       - name: Run booking agent
         env:
           TEST_MODE: ${{ github.event.inputs.test_mode }}
